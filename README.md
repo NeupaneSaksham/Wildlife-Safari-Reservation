@@ -8,8 +8,7 @@ The Wildlife Safari Reservation System is a web-based application that simplifie
 
 ## ✨ Features
 
-- 🏞️ Browse available safari tours
-- 📅 Check tour availability by date
+- 🏞️ Select wildlife reserve packages
 - 📝 Reserve a safari tour with customer details
 - 🔒 Secure reservation and confirmation system
 - 📊 Admin dashboard for tour and reservation management 
