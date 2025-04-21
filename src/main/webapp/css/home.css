@@ -1,0 +1,347 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    color: #000;
+    font-size: 1.05rem;
+}
+
+header {
+    background-color: #fff;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header img {
+    height: 60px;
+}
+/* Wrapper to handle center and right alignment */
+.nav-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    gap: 40px;
+    position: relative;
+}
+
+/* Centered navigation links */
+.nav-center {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Right-side login/signup */
+.nav-right {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Common nav link styles */
+.nav-center a,
+.nav-right a {
+    color: #000;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-center a:hover,
+.nav-right a:hover {
+    color: #FF9149;
+    border-bottom: 2px solid #FF9149;
+}
+
+.nav-center a.active {
+    color: #FF9149;
+    border-bottom: 2px solid #FF9149;
+}
+
+/* Styling login/signup as buttons */
+.nav-right a {
+    background-color: #FF9149;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+}
+
+.nav-right a:hover {
+    background-color: #e77e32;
+    color: white;
+    border-color: white;
+}
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align text to the left */
+    padding: 80px 0 80px 50px; /* Adjust left padding */
+    position: relative;
+    color: white;
+    height: 500px;
+    background: url('../assets/lion.jpg') no-repeat right center;
+    background-size: 100%; /* Decrease size slightly */
+}
+
+.hero-text {
+    z-index: 2;
+    max-width: 550px;
+    text-align: left;
+    margin-left: 0;
+    padding: 0;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #FF9149;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+
+
+.hero-text a {
+    background-color: #FF9149;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.hero-text a:hover {
+    background-color: #e77e32;
+}
+
+.gallery {
+    background-color: #ffffff;
+    color: #333;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.gallery h2 {
+    font-size: 2.6rem;
+    margin-bottom: 40px;
+    color: #FF9149;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+}
+
+.testimonials {
+    background-color: #fff;
+    color: #000;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 2.6rem;
+    margin-bottom: 40px;
+    color: #FF9149;
+}
+
+.testimonial-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.testimonial-card p {
+    font-style: italic;
+}
+
+.testimonial-card .author {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #FF9149;
+}
+
+.faq {
+    background-color: #f8f8f8;
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.faq h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #FF9149;
+}
+
+.faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-question h3 {
+    color: #232323;
+    font-size: 1.1rem;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease;
+    color: #333;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 0;
+}
+
+.faq-answer p {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 10px 0;
+}
+
+.faq-item.active .arrow-icon {
+    transform: rotate(180deg);
+}
+
+
+footer {
+    background-color: #232323;
+    color: #ccc;
+    padding: 60px 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-column {
+    flex: 1 1 250px;
+}
+
+.footer-column a {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.footer-column h4 {
+    color: #FF9149;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.footer-column p,
+.footer-column a {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #FF9149;
+}
+
+.footer-bottom {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.85rem;
+    color: #666;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.footer-socials a {
+    color: #aaa;
+    font-size: 1.3rem;
+    transition: color 0.3s ease;
+}
+
+.footer-socials a:hover {
+    color: #FF9149;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-bottom {
+        text-align: left;
+    }
+}
