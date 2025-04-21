@@ -1,4 +1,4 @@
-# 🐘 Wildlife Safari Reservation System
+# 🐘 Wildlife Reserve Safari Reservation System
 
 Welcome to the **Wildlife Safari Reservation System**! This project allows customers to seamlessly browse and book safari tours online, helping both tourists and safari operators manage reservations effectively.
 
