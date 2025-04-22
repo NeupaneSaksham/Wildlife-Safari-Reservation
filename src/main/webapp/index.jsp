@@ -19,8 +19,8 @@
       <a href="view/pages/aboutUs.jsp">About Us</a>
     </div>
     <div class="nav-right">
-      <a href="login.jsp" style="background-color: #D2D2D2; color: black ">Login</a>
-      <a href="signup.jsp">Signup</a>
+      <a href="view/pages/login.jsp" style="background-color: #D2D2D2; color: black ">Login</a>
+      <a href="view/pages/Register.jsp">Signup</a>
     </div>
   </nav>
 </header>
