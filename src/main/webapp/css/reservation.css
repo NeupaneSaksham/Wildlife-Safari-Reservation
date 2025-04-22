@@ -82,6 +82,13 @@ header img { height: 60px; }
     margin: 60px auto;
 }
 
+.image-container {
+    flex: 1;
+    background: url('${pageContext.request.contextPath}/assets/reservation.PNG') no-repeat center center;
+    background-size: cover;
+    min-height: 100%;
+}
+
 .form-container {
     flex: 1;
     padding: 50px 40px;
@@ -149,34 +156,23 @@ footer {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 40px;
+    margin-top: 60px;
 }
 
 .footer-column {
     flex: 1 1 250px;
 }
 
-.footer-column a {
-    color: #aaa;
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    display: block;
-}
-
 .footer-column h4 {
     color: #FF9149;
-    font-size: 1.3rem;
     margin-bottom: 20px;
 }
 
-.footer-column p,
-.footer-column a {
+.footer-column a, .footer-column p {
     color: #aaa;
     font-size: 0.95rem;
     margin-bottom: 12px;
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
 .footer-column a:hover {
@@ -186,11 +182,10 @@ footer {
 .footer-bottom {
     width: 100%;
     text-align: center;
-    margin-top: 40px;
-    font-size: 0.85rem;
-    color: #666;
     border-top: 1px solid #333;
     padding-top: 20px;
+    margin-top: 40px;
+    font-size: 0.85rem;
 }
 
 .footer-socials {
@@ -202,18 +197,28 @@ footer {
 .footer-socials a {
     color: #aaa;
     font-size: 1.3rem;
-    transition: color 0.3s ease;
 }
 
 .footer-socials a:hover {
     color: #FF9149;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .wrapper {
+        flex-direction: column;
+        max-width: 90%;
+    }
+
+    .image-container {
+        height: 250px;
+    }
+
+    .form-container {
+        padding: 30px 20px;
+    }
+
     footer {
         flex-direction: column;
-        align-items: flex-start;
     }
 
     .footer-bottom {
