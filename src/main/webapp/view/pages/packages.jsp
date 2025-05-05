@@ -26,7 +26,7 @@
             <a href="${pageContext.request.contextPath}/view/pages/aboutUs.jsp">About Us</a>
         </div>
         <div class="nav-right">
-            <a href="${pageContext.request.contextPath}/view/pages/logout.jsp" style="background-color:#ff5858; color:white;">Logout</a>
+            <a href="${pageContext.request.contextPath}/logout" style="background-color:#ff5858; color:white;">Logout</a>
 
             <a href="${pageContext.request.contextPath}/view/pages/profile.jsp" class="profile-link">
                 <i class="fas fa-user"></i>
