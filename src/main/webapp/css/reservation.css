@@ -84,7 +84,6 @@ header img { height: 60px; }
 
 .image-container {
     flex: 1;
-    background: url('${pageContext.request.contextPath}/assets/reservation.PNG') no-repeat center center;
     background-size: cover;
     min-height: 100%;
 }
