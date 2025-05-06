@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
     <title>Safari Reservation | Ban Yatra</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reservation.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body>
 
@@ -19,8 +19,7 @@
             <a href="${pageContext.request.contextPath}/view/pages/aboutUs.jsp">About Us</a>
         </div>
         <div class="nav-right">
-            <a href="${pageContext.request.contextPath}/view/pages/logout.jsp" style="background-color:#ff5858; color:white;">Logout</a>
-
+            <a href="${pageContext.request.contextPath}/logout" style="background-color:#ff5858; color:white;">Logout</a>
             <a href="${pageContext.request.contextPath}/view/pages/profile.jsp" class="profile-link">
                 <i class="fas fa-user"></i>
                 <span>Profile</span>
@@ -33,7 +32,7 @@
     <div class="image-container" style="flex: 1; background: url('${pageContext.request.contextPath}/assets/reservation.PNG') no-repeat center center; background-size: cover; min-height: 100%;"></div>
     <div class="form-container">
         <h2>Safari Reservation</h2>
-        <form action="submitReservation.jsp" method="post">
+        <form action="${pageContext.request.contextPath}/submitReservation.jsp" method="post">
             <label for="fullName">Full Name</label>
             <input type="text" id="fullName" name="fullName" required>
 
@@ -47,7 +46,7 @@
             <input type="date" id="date" name="date" required>
 
             <label for="package">Wildlife Reserve</label>
-            <select id="package" name="package" required>
+            <select id="package" name="package" required onchange="updatePrice()">
                 <option value="">-- Select a Reserve --</option>
                 <option value="Chitwan National Park">Chitwan National Park</option>
                 <option value="Bardia National Park">Bardia National Park</option>
@@ -58,12 +57,24 @@
             </select>
 
             <label for="groupSize">Number of People</label>
-            <input type="number" id="groupSize" name="groupSize" min="1" required>
+            <input type="number" id="groupSize" name="groupSize" min="1" required onchange="updatePrice()">
 
             <label for="notes">Additional Notes</label>
             <textarea id="notes" name="notes" rows="4"></textarea>
 
-            <button type="submit">Reserve Now</button>
+            <!-- Payment Section -->
+            <label for="price">Reservation Fee (NPR)</label>
+            <input type="text" id="price" name="price" value="0" readonly>
+
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="">-- Select Payment Method --</option>
+                <option value="esewa">eSewa</option>
+                <option value="khalti">Khalti</option>
+                <option value="cash">Cash on Arrival</option>
+            </select>
+
+            <button type="submit">Proceed to Payment</button>
         </form>
     </div>
 </div>
@@ -95,6 +106,31 @@
         &copy; 2025 WildLife Tours. All rights reserved.
     </div>
 </footer>
+
+<script>
+    const pricing = {
+        "Chitwan National Park": 2500,
+        "Bardia National Park": 3000,
+        "Shuklaphanta Wildlife Reserve": 2000,
+        "Koshi Tappu Wildlife Reserve": 2200,
+        "Parsa National Park": 2100,
+        "Banke National Park": 2800
+    };
+
+    function updatePrice() {
+        const selectedPackage = document.getElementById('package').value;
+        const groupSize = document.getElementById('groupSize').value;
+        let price = 0;
+
+        if (selectedPackage && groupSize) {
+            // Calculate price based on package and group size
+            price = pricing[selectedPackage] * groupSize;
+        }
+
+        // Update the price field
+        document.getElementById('price').value = price;
+    }
+</script>
 
 </body>
 </html>

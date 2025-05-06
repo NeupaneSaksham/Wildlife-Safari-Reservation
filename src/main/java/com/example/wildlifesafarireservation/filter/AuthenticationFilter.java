@@ -3,18 +3,10 @@ package com.example.wildlifesafarireservation.filter;
 import com.example.wildlifesafarireservation.models.UserModel;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 
-/**
- * AuthenticationFilter
- *
- * This filter checks if a user is authenticated before allowing access to protected resources.
- * It intercepts requests to secured URLs and redirects unauthenticated users to the login page.
- */
 @WebFilter(urlPatterns = {
         "/UserDashboardServlet",
         "/AdminDashboardServlet",
@@ -25,7 +17,6 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        // Optional initialization code
     }
 
     @Override
@@ -45,7 +36,6 @@ public class AuthenticationFilter implements Filter {
 
         String requestURI = httpRequest.getRequestURI();
 
-        // Public resources that don’t require authentication
         boolean isPublicResource = requestURI.contains("login.jsp")
                 || requestURI.contains("register.jsp")
                 || requestURI.contains("LoginServlet")
@@ -61,6 +51,5 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void destroy() {
-        // Optional cleanup
     }
 }
