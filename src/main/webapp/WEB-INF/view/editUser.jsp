@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: shaks
-  Date: 5/21/2025
-  Time: 10:54 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.wildlifesafarireservation.models.UserModel" %>
 
@@ -12,30 +5,119 @@
     UserModel user = (UserModel) request.getAttribute("user");
 %>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Edit User</title>
+    <meta charset="UTF-8">
+    <title>Edit User | Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form select {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h2>Edit User</h2>
 
-<form action="edit-user" method="post">
-    <input type="hidden" name="id" value="${user.id}"/>
+<div class="form-container">
+    <h2>Edit User</h2>
+    <form action="edit-user" method="post">
+        <input type="hidden" name="id" value="${user.id}" />
 
-    Full Name: <input type="text" name="fullName" value="${user.fullName}" required /><br/>
-    Email: <input type="email" name="email" value="${user.email}" required /><br/>
-    Phone: <input type="text" name="phone" value="${user.phone}" /><br/>
-    Address: <input type="text" name="address" value="${user.address}" /><br/>
+        <label>Full Name:</label>
+        <input type="text" name="fullName" value="${user.fullName}" required />
 
-    Role:
-    <select name="role">
-        <option value="1" ${user.role == 'USER' ? 'selected' : ''}>User</option>
-        <option value="2" ${user.role == 'ADMIN' ? 'selected' : ''}>Admin</option>
-    </select><br/>
+        <label>Email:</label>
+        <input type="email" name="email" value="${user.email}" required />
 
-    <button type="submit">Update</button>
-</form>
+        <label>Phone:</label>
+        <input type="text" name="phone" value="${user.phone}" />
 
-<a href="${pageContext.request.contextPath}/admin/dashboard?view=users">Back to User List</a>
+        <label>Address:</label>
+        <input type="text" name="address" value="${user.address}" />
+
+        <label>Role:</label>
+        <select name="role">
+            <option value="ADMIN">Admin</option>
+            <option value="USER">User</option>
+        </select>
+
+
+        <button type="submit">Update</button>
+    </form>
+
+    <a class="back-link" href="${pageContext.request.contextPath}/admin/dashboard?view=users">← Back to User List</a>
+</div>
+
 </body>
 </html>

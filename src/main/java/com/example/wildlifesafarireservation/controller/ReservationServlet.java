@@ -48,7 +48,6 @@ public class ReservationServlet extends HttpServlet {
 
         int groupSize = 0;
         double price = 0.0;
-        String packageName = "";
         Date safariDate = null;
 
         try {
@@ -62,7 +61,6 @@ public class ReservationServlet extends HttpServlet {
 
             groupSize = Integer.parseInt(groupSizeStr);
             price = Double.parseDouble(priceStr);
-            packageName = packageIdStr;
 
             try {
                 safariDate = Date.valueOf(safariDateStr);
@@ -94,21 +92,18 @@ public class ReservationServlet extends HttpServlet {
             boolean inserted = reservDAO.insertReservation(reservation);
 
             if (inserted) {
-                // Get userId from session for activity log
                 Integer userId = (Integer) request.getSession().getAttribute("userId");
-                if (userId == null) {
-                    // fallback userId if not available (optional)
-                    userId = -1;
-                }
+                if (userId == null) userId = -1;
 
+                // Log the activity
+                ActivityLogDAO logDAO = new ActivityLogDAO();
                 ActivityLog log = new ActivityLog();
-                log.setActivity("Made reservation for package: " + packageName + ", Safari Date: " + safariDate);
-                log.setActivityType("Reservation");
                 log.setUserId(userId);
+                log.setActivity("Made a reservation for " + fullName);
+                log.setActivityType("Reservation");
                 log.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
-                ActivityLogDAO activityLogDAO = new ActivityLogDAO(connection);
-                activityLogDAO.addActivityLog(log);
+                logDAO.addActivityLog(log);
 
                 response.sendRedirect(request.getContextPath() + "/reservationSuccess");
             } else {

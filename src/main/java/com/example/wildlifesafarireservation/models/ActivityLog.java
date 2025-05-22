@@ -9,48 +9,20 @@ public class ActivityLog {
     private int userId;
     private Timestamp createdAt;
 
-    // Default constructor
-    public ActivityLog() {
-    }
+    public ActivityLog() {}
 
-    // Getters and setters
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getActivity() { return activity; }
+    public void setActivity(String activity) { this.activity = activity; }
 
-    public String getActivity() {
-        return activity;
-    }
+    public String getActivityType() { return activityType; }
+    public void setActivityType(String activityType) { this.activityType = activityType; }
 
-    public void setActivity(String activity) {
-        this.activity = activity;
-    }
+    public int getUserId() { return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
 
-    public String getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(String activityType) {
-        this.activityType = activityType;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
+    public Timestamp getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Timestamp createdAt) { this.createdAt = createdAt; }
 }

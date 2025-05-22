@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
             if (user.getRoleEnum() == UserModel.Role.ADMIN) {
                 response.sendRedirect(contextPath + "/index.jsp");
             } else {
-                response.sendRedirect(contextPath + "/home");
+                response.sendRedirect(contextPath + "/Home");
             }
             return;
         }

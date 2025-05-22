@@ -4,17 +4,13 @@ import com.example.wildlifesafarireservation.services.AuthService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+
 import java.io.IOException;
 import java.util.regex.Pattern;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 5,
-        maxRequestSize = 1024 * 1024 * 20
-)
 public class RegisterServlet extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(RegisterServlet.class.getName());
@@ -36,70 +32,51 @@ public class RegisterServlet extends HttpServlet {
             String role = request.getParameter("role");
 
             if (name == null || name.trim().isEmpty()) {
-                request.setAttribute("errorMessage", "Name is required.");
-                request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
+                forwardWithError(request, response, "Name is required.");
                 return;
             }
 
             if (email == null || email.trim().isEmpty() || !isValidEmail(email)) {
-                request.setAttribute("errorMessage", "Valid email is required.");
-                request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
+                forwardWithError(request, response, "Valid email is required.");
                 return;
             }
 
             if (password == null || password.trim().isEmpty()) {
-                request.setAttribute("errorMessage", "Password is required.");
-                request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
+                forwardWithError(request, response, "Password is required.");
                 return;
             }
 
             if (!password.equals(confirmPassword)) {
-                request.setAttribute("errorMessage", "Passwords do not match.");
-                request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
+                forwardWithError(request, response, "Passwords do not match.");
                 return;
             }
 
-            Part imagePart = request.getPart("image");
-            byte[] imageBytes = null;
-
-            if (imagePart != null && imagePart.getSize() > 0) {
-                if (imagePart.getSize() > 1024 * 1024 * 5) {
-                    request.setAttribute("errorMessage", "Image too large. Max size is 5MB.");
-                    request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
-                    return;
-                }
-
-                if (!imagePart.getContentType().startsWith("image/")) {
-                    request.setAttribute("errorMessage", "Invalid file type. Please upload an image.");
-                    request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
-                    return;
-                }
-
-                imageBytes = imagePart.getInputStream().readAllBytes();
-            }
-
-            int userID = AuthService.register(name, email, password, role, imageBytes);
+            // Register the user (profileImage not needed anymore)
+            int userID = AuthService.register(name, email, password, role);
 
             if (userID != -1) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", AuthService.getUserById(userID));
-                session.setMaxInactiveInterval(1800);
-                response.sendRedirect("index.jsp");
+                session.setMaxInactiveInterval(1800); // 30 minutes
+                response.sendRedirect("LoginServlet?success=Account created successfully. Please log in.");
             } else {
-                request.setAttribute("errorMessage", "Registration failed. Email might be in use.");
-                request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
+                forwardWithError(request, response, "Registration failed. Email might be in use.");
             }
 
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error during registration", e);
-            request.setAttribute("errorMessage", "An error occurred: " + e.getMessage());
-            request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
+            forwardWithError(request, response, "An error occurred: " + e.getMessage());
         }
     }
 
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern pattern = Pattern.compile(emailRegex);
-        return pattern.matcher(email).matches();
+        return Pattern.compile(emailRegex).matcher(email).matches();
+    }
+
+    private void forwardWithError(HttpServletRequest request, HttpServletResponse response, String message)
+            throws ServletException, IOException {
+        request.setAttribute("errorMessage", message);
+        request.getRequestDispatcher("/WEB-INF/view/Register.jsp").forward(request, response);
     }
 }

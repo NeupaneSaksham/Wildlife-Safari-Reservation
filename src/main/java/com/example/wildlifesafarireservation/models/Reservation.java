@@ -12,7 +12,6 @@ public class Reservation {
     private Date reservationDate;
     private Date safariDate;
     private String status;
-    private String paymentMethod;
     private String notes;
     private int packageId;
 
@@ -89,13 +88,6 @@ public class Reservation {
         this.status = status;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
 
     public String getNotes() {
         return notes;

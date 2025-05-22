@@ -15,8 +15,8 @@
     <div id="errorMessage" class="alert alert-error" style="display: none;"></div>
     <div id="successMessage" class="alert alert-success" style="display: none;"></div>
 
-    <form action="${pageContext.request.contextPath}/RegisterServlet" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
-        <div class="form-row">
+    <form action="${pageContext.request.contextPath}/RegisterServlet" method="post" onsubmit="return validateForm()">
+    <div class="form-row">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -40,25 +40,8 @@
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="role">Role</label>
-                <select id="role" name="role" required>
-                    <option value="">Select a role</option>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
-            <div class="form-group profile-section">
-                <div class="image-preview-container">
-                    <img id="imagePreview" src="${pageContext.request.contextPath}/DefaultProfile/default-profile.svg" alt="Preview">
-                </div>
-                <div class="file-upload">
-                    <label for="profileImage">Profile Picture</label>
-                    <input type="file" id="profileImage" name="image" accept="image/*" onchange="previewImage(event)">
-                </div>
-            </div>
-        </div>
+        <!-- Hidden role input: fixed as "user" -->
+        <input type="hidden" name="role" value="USER">
 
         <div class="terms-container">
             <input type="checkbox" id="terms" name="terms" required>
@@ -68,21 +51,13 @@
         <button type="submit" class="register-button">Create Account</button>
 
         <div class="login-link">
-            Already have an account? <a href="${pageContext.request.contextPath}/WEB-INF/view/pages/login.jsp">Login here</a>
+            Already have an account?
+            <a href="${pageContext.request.contextPath}/LoginServlet">Login here</a>
         </div>
     </form>
 </div>
 
 <script>
-    function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function() {
-            const output = document.getElementById('imagePreview');
-            output.src = reader.result;
-        }
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
     function togglePassword(id) {
         const input = document.getElementById(id);
         const btn = input.nextElementSibling;

@@ -76,7 +76,7 @@ public class EditUserServlet extends HttpServlet {
             userDAO.updateUser(user);
 
             response.sendRedirect(request.getContextPath() + "/admin/manage-users?success=User updated successfully");
-        } catch (NumberFormatException | SQLException e) {
+        } catch (NumberFormatException e) {
             throw new ServletException(e);
         }
     }

@@ -42,7 +42,7 @@ public class ManageUsersServlet extends HttpServlet {
             List<UserModel> userList = userDAO.getAllUsers();
 
             request.setAttribute("userList", userList);
-            request.getRequestDispatcher("/WEB-INF/view/admin/manage_users.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/manageUsers.jsp").forward(request, response);
 
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Error retrieving users", e);

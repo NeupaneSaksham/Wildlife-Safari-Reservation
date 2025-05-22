@@ -14,6 +14,10 @@ public class ReservDAO {
         this.connection = connection;
     }
 
+    public ReservDAO() {
+
+    }
+
     // Method to insert a new reservation
     public boolean insertReservation(Reservation reservation) {
         String sql = "INSERT INTO reservation (full_name, email, phone, number_of_guests, total_cost, reservation_date, safari_date, status, notes) " +

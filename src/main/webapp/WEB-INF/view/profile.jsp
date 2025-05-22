@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>User Profile</title>
     <style>
         :root {
@@ -23,14 +23,12 @@
             --radius-md: 12px;
             --radius-sm: 8px;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
-
         body {
             background-color: var(--bg);
             color: var(--text);
@@ -39,7 +37,6 @@
             min-height: 100vh;
             font-size: 18px;
         }
-
         .profile-container {
             max-width: 760px;
             margin: 0 auto;
@@ -48,7 +45,6 @@
             box-shadow: var(--shadow-md);
             overflow: hidden;
         }
-
         .profile-header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             padding: 48px 40px;
@@ -56,26 +52,22 @@
             color: var(--white);
             position: relative;
         }
-
         .profile-title {
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 10px;
         }
-
         .profile-subtitle {
             font-size: 18px;
             opacity: 0.9;
             font-weight: 500;
         }
-
         .profile-image-container {
             position: relative;
             width: fit-content;
             margin: -88px auto 32px;
             z-index: 2;
         }
-
         .profile-image {
             width: 180px;
             height: 180px;
@@ -86,7 +78,6 @@
             display: block;
             background-color: var(--primary-light);
         }
-
         .profile-placeholder {
             width: 180px;
             height: 180px;
@@ -101,44 +92,36 @@
             background-color: var(--primary);
             box-shadow: var(--shadow-md);
         }
-
         .profile-content {
             padding: 0 48px 48px;
         }
-
         .profile-info {
             margin-bottom: 40px;
         }
-
         .info-item {
             display: flex;
             padding: 24px 0;
             border-bottom: 1px solid var(--border);
         }
-
         .info-item:last-child {
             border-bottom: none;
         }
-
         .info-label {
             width: 160px;
             font-weight: 600;
             color: var(--primary);
             font-size: 18px;
         }
-
         .info-value {
             flex: 1;
             color: var(--text);
             font-size: 18px;
         }
-
         .profile-actions {
             display: flex;
             justify-content: center;
             gap: 15px;
         }
-
         .btn-edit {
             padding: 16px 36px;
             background-color: var(--primary);
@@ -155,13 +138,11 @@
             gap: 10px;
             box-shadow: 0 4px 8px rgba(255, 145, 73, 0.25);
         }
-
         .btn-edit:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(255, 145, 73, 0.3);
         }
-
         .btn-back {
             padding: 10px 20px;
             background-color: var(--primary-light);
@@ -177,36 +158,30 @@
             gap: 10px;
             text-decoration: none;
         }
-
         .btn-back:hover {
             background-color: var(--primary-dark);
             color: var(--white);
             transform: translateY(-2px);
         }
-
         @media (max-width: 640px) {
             body {
                 padding: 20px;
                 font-size: 16px;
             }
-
             .profile-header {
                 padding: 36px 28px;
             }
-
             .profile-image,
             .profile-placeholder {
                 width: 130px;
                 height: 130px;
                 font-size: 52px;
             }
-
             .info-item {
                 flex-direction: column;
                 gap: 8px;
                 padding: 18px 0;
             }
-
             .info-label {
                 width: 100%;
             }
@@ -216,17 +191,16 @@
 <body>
 
 <div class="profile-container">
-    <div class="profile-header">
-        <c:if test="${not empty user}">
-            <h1 class="profile-title">Welcome, ${user.fullName}</h1>
-        </c:if>
-    </div>
-
     <c:if test="${not empty user}">
+        <div class="profile-header">
+            <h1 class="profile-title">Welcome, ${user.fullName}</h1>
+        </div>
+
         <div class="profile-image-container">
             <c:choose>
                 <c:when test="${not empty user.profileImage}">
-                    <img src="data:image/jpeg;base64,${user.profileImage}" alt="Profile Picture" class="profile-image"/>
+                    <img src="${pageContext.request.contextPath}/profileImages/${user.profileImage}"
+                         alt="Profile Picture" class="profile-image"/>
                 </c:when>
                 <c:otherwise>
                     <div class="profile-placeholder">
@@ -236,27 +210,27 @@
             </c:choose>
         </div>
 
-    <c:if test="${not empty user}">
-        <div class="info-item">
-            <div class="info-label">Full Name</div>
-            <div class="info-value">${user.fullName != null ? user.fullName : 'N/A'}</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">Email</div>
-            <div class="info-value">${user.email != null ? user.email : 'N/A'}</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">Phone</div>
-            <div class="info-value">${user.phone != null ? user.phone : 'N/A'}</div>
-        </div>
-        <div class="info-item">
-            <div class="info-label">Address</div>
-            <div class="info-value">${user.address != null ? user.address : 'N/A'}</div>
-        </div>
-    </c:if>
+        <div class="profile-content">
+            <div class="profile-info">
+                <div class="info-item">
+                    <div class="info-label">Full Name</div>
+                    <div class="info-value">${empty user.fullName ? 'N/A' : user.fullName}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">${empty user.email ? 'N/A' : user.email}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Phone</div>
+                    <div class="info-value">${empty user.phone ? 'N/A' : user.phone}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Address</div>
+                    <div class="info-value">${empty user.address ? 'N/A' : user.address}</div>
+                </div>
+            </div>
 
-
-    <div class="profile-actions">
+            <div class="profile-actions">
                 <a href="${pageContext.request.contextPath}/editProfile" class="btn-edit">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -265,7 +239,6 @@
                     Edit Profile
                 </a>
 
-                <!-- Back Button -->
                 <a href="${pageContext.request.contextPath}/packages" class="btn-back">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M14 3l-9 9 9 9"></path>

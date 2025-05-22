@@ -9,11 +9,10 @@ CREATE TABLE IF NOT EXISTS users (
                                      phone VARCHAR(20),
                                      address VARCHAR(255),
                                      profile_image VARCHAR(255),
-                                     role INT DEFAULT 1 NOT NULL,
+                                     role VARCHAR(50) DEFAULT 'user' NOT NULL,
                                      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                                      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-
 
 CREATE TABLE IF NOT EXISTS activity_logs (
                                              id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,13 +31,6 @@ CREATE TABLE IF NOT EXISTS packages (
                                         duration INT NOT NULL,
                                         user_id INT,
                                         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
-);
-
-CREATE TABLE IF NOT EXISTS user_packages (
-                                             package_id INT PRIMARY KEY,
-                                             user_id INT,
-                                             FOREIGN KEY (package_id) REFERENCES packages(package_id) ON DELETE CASCADE,
-                                             FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS reservation (

@@ -1,7 +1,9 @@
 package com.example.wildlifesafarireservation.controller;
 
+import com.example.wildlifesafarireservation.dao.ActivityLogDAO;
 import com.example.wildlifesafarireservation.dao.ReservDAO;
 import com.example.wildlifesafarireservation.dao.UserDAO;
+import com.example.wildlifesafarireservation.models.ActivityLog;
 import com.example.wildlifesafarireservation.models.Reservation;
 import com.example.wildlifesafarireservation.models.UserModel;
 import com.example.wildlifesafarireservation.utils.DBConnectionUtil;
@@ -32,6 +34,7 @@ public class DashboardServlet extends HttpServlet {
 
         List<Reservation> reservationList = null;
         List<UserModel> userList = null;
+        List<ActivityLog> activityLogs = null;  // Add activity logs list
 
         try (Connection connection = DBConnectionUtil.getConnection()) {
             ReservDAO reservDAO = new ReservDAO(connection);
@@ -40,12 +43,16 @@ public class DashboardServlet extends HttpServlet {
             UserDAO userDAO = new UserDAO(connection);
             userList = userDAO.getAllUsers();
 
+            ActivityLogDAO activityLogDAO = new ActivityLogDAO();
+            activityLogs = activityLogDAO.getAllLogs();  // Fetch all activity logs
+
         } catch (SQLException e) {
             throw new ServletException("Database error", e);
         }
 
         request.setAttribute("reservations", reservationList);
         request.setAttribute("userList", userList);
+        request.setAttribute("activityLogs", activityLogs);  // Set logs as request attribute
 
         request.getRequestDispatcher("/WEB-INF/view/dashboard.jsp").forward(request, response);
     }

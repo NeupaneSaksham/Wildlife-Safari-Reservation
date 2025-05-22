@@ -7,7 +7,7 @@
     <!-- Define the servlet -->
     <servlet>
         <servlet-name>UserProfileServlet</servlet-name>
-        <servlet-class>com.example.wildlifesafarireservation.controller.UserProfileServlet</servlet-class>
+        <servlet-class>com.example.wildlifesafarireservation.controller.ProfileServlet</servlet-class>
     </servlet>
 
     <!-- Map the servlet to a URL pattern -->

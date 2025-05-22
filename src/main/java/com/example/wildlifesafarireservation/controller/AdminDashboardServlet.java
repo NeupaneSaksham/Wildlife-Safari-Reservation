@@ -1,10 +1,8 @@
 package com.example.wildlifesafarireservation.controller;
 
 import com.example.wildlifesafarireservation.dao.UserDAO;
-import com.example.wildlifesafarireservation.dao.PackageDAO;
-import com.example.wildlifesafarireservation.dao.ReservationDAO;
+import com.example.wildlifesafarireservation.dao.ReservDAO;
 import com.example.wildlifesafarireservation.models.UserModel;
-import com.example.wildlifesafarireservation.models.Package;
 import com.example.wildlifesafarireservation.models.Reservation;
 import com.example.wildlifesafarireservation.services.AuthService;
 
@@ -15,15 +13,13 @@ import java.util.List;
 
 public class AdminDashboardServlet extends HttpServlet {
     private UserDAO userDao;
-    private PackageDAO packageDao;
-    private ReservationDAO reservationDao;
+    private ReservDAO reservationDao;
     private AuthService authService;
 
     @Override
     public void init() throws ServletException {
         this.userDao = new UserDAO();
-        this.packageDao = new PackageDAO();
-        this.reservationDao = new ReservationDAO();
+        this.reservationDao = new ReservDAO();
         this.authService = new AuthService(userDao);
     }
 
@@ -37,12 +33,10 @@ public class AdminDashboardServlet extends HttpServlet {
 
         // Fetch data for dashboard
         List<UserModel> allUsers = userDao.getAllUsers();
-        List<PackageModel> allPackages = packageDao.getAllPackages();
-        List<ReservationModel> allReservations = reservationDao.getAllReservations();
+        List<Reservation> allReservations = reservationDao.getAllReservations();
 
         // Set data as attributes for the JSP page
         request.setAttribute("users", allUsers);
-        request.setAttribute("packages", allPackages);
         request.setAttribute("reservations", allReservations);
 
         // Forward to the Admin Dashboard JSP page

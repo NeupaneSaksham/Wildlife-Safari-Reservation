@@ -25,15 +25,15 @@ public class DeleteUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idStr = request.getParameter("id");
         if (idStr == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/users");
+            response.sendRedirect(request.getContextPath() + "/dashboard");
             return;
         }
 
         try {
             int id = Integer.parseInt(idStr);
             userDAO.deleteUser(id);
-            response.sendRedirect(request.getContextPath() + "/admin/users?success=User deleted successfully");
-        } catch (NumberFormatException | SQLException e) {
+            response.sendRedirect(request.getContextPath() + "/admin/manage-users?success=User deleted successfully");
+        } catch (NumberFormatException e) {
             throw new ServletException(e);
         }
     }
